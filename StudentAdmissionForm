@@ -1,0 +1,236 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class StudentAdmissionForm {
+
+    private JFrame frame;
+    private JTextField nameField, fatherNameField, motherNameField, addressField, sscGpaField, hscGpaField;
+    private JComboBox<String> dayCombo, monthCombo, yearCombo;
+    private JRadioButton maleButton, femaleButton, otherButton;
+    private JRadioButton bloodGroupAPositive, bloodGroupBPositive, bloodGroupABPositive, bloodGroupOPositive;
+    private JRadioButton bloodGroupANegative, bloodGroupBNegative, bloodGroupABNegative;
+    private JRadioButton sweButton, cseButton, eeeButton, bbaButton;
+    private JButton submitButton, resetButton;
+
+    public StudentAdmissionForm() {
+        frame = new JFrame("Student Admission Form");
+        frame.setSize(400, 600);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(new GridLayout(0, 2, 10, 10));
+
+        // Name field
+        frame.add(new JLabel("Name:"));
+        nameField = new JTextField();
+        frame.add(nameField);
+
+        // Father's name field
+        frame.add(new JLabel("Father's Name:"));
+        fatherNameField = new JTextField();
+        frame.add(fatherNameField);
+
+        // Mother's name field
+        frame.add(new JLabel("Mother's Name:"));
+        motherNameField = new JTextField();
+        frame.add(motherNameField);
+
+        // Date of birth
+        frame.add(new JLabel("Date of Birth:"));
+        dayCombo = new JComboBox<>(getDays());
+        monthCombo = new JComboBox<>(getMonths());
+        yearCombo = new JComboBox<>(getYears());
+        JPanel dobPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        dobPanel.add(dayCombo);
+        dobPanel.add(monthCombo);
+        dobPanel.add(yearCombo);
+        frame.add(dobPanel);
+
+        // Gender
+        frame.add(new JLabel("Gender:"));
+        maleButton = new JRadioButton("Male");
+        femaleButton = new JRadioButton("Female");
+        otherButton = new JRadioButton("Other");
+        ButtonGroup genderGroup = new ButtonGroup();
+        genderGroup.add(maleButton);
+        genderGroup.add(femaleButton);
+        genderGroup.add(otherButton);
+        JPanel genderPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        genderPanel.add(maleButton);
+        genderPanel.add(femaleButton);
+        genderPanel.add(otherButton);
+        frame.add(genderPanel);
+
+        // Address field
+        frame.add(new JLabel("Address:"));
+        addressField = new JTextField();
+        frame.add(addressField);
+
+        // Blood group
+        frame.add(new JLabel("Blood Group:"));
+        bloodGroupAPositive = new JRadioButton("A+");
+        bloodGroupBPositive = new JRadioButton("B+");
+        bloodGroupABPositive = new JRadioButton("AB+");
+        bloodGroupOPositive = new JRadioButton("O+");
+        bloodGroupANegative = new JRadioButton("A-");
+        bloodGroupBNegative = new JRadioButton("B-");
+        bloodGroupABNegative = new JRadioButton("AB-");
+
+        ButtonGroup bloodGroup = new ButtonGroup();
+        bloodGroup.add(bloodGroupAPositive);
+        bloodGroup.add(bloodGroupBPositive);
+        bloodGroup.add(bloodGroupABPositive);
+        bloodGroup.add(bloodGroupOPositive);
+        bloodGroup.add(bloodGroupANegative);
+        bloodGroup.add(bloodGroupBNegative);
+        bloodGroup.add(bloodGroupABNegative);
+
+        JPanel bloodPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        bloodPanel.add(bloodGroupAPositive);
+        bloodPanel.add(bloodGroupBPositive);
+        bloodPanel.add(bloodGroupABPositive);
+        bloodPanel.add(bloodGroupOPositive);
+        bloodPanel.add(bloodGroupANegative);
+        bloodPanel.add(bloodGroupBNegative);
+        bloodPanel.add(bloodGroupABNegative);
+        frame.add(bloodPanel);
+
+        // GPA fields
+        frame.add(new JLabel("SSC GPA:"));
+        sscGpaField = new JTextField();
+        frame.add(sscGpaField);
+
+        frame.add(new JLabel("HSC GPA:"));
+        hscGpaField = new JTextField();
+        frame.add(hscGpaField);
+
+        // Department selection
+        frame.add(new JLabel("Department:"));
+        sweButton = new JRadioButton("SWE");
+        cseButton = new JRadioButton("CSE");
+        eeeButton = new JRadioButton("EEE");
+        bbaButton = new JRadioButton("BBA");
+
+        ButtonGroup deptGroup = new ButtonGroup();
+        deptGroup.add(sweButton);
+        deptGroup.add(cseButton);
+        deptGroup.add(eeeButton);
+        deptGroup.add(bbaButton);
+        JPanel deptPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        deptPanel.add(sweButton);
+        deptPanel.add(cseButton);
+        deptPanel.add(eeeButton);
+        deptPanel.add(bbaButton);
+        frame.add(deptPanel);
+
+        // Submit and Reset buttons
+        submitButton = new JButton("Submit");
+        resetButton = new JButton("Reset");
+
+        submitButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                showFormData();
+            }
+        });
+
+        resetButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                clearForm();
+            }
+        });
+
+        frame.add(submitButton);
+        frame.add(resetButton);
+
+        frame.setVisible(true);
+    }
+
+    private void clearForm() {
+        nameField.setText("");
+        fatherNameField.setText("");
+        motherNameField.setText("");
+        addressField.setText("");
+        sscGpaField.setText("");
+        hscGpaField.setText("");
+        dayCombo.setSelectedIndex(0);
+        monthCombo.setSelectedIndex(0);
+        yearCombo.setSelectedIndex(0);
+        maleButton.setSelected(false);
+        femaleButton.setSelected(false);
+        otherButton.setSelected(false);
+        bloodGroupAPositive.setSelected(false);
+        bloodGroupBPositive.setSelected(false);
+        bloodGroupABPositive.setSelected(false);
+        bloodGroupOPositive.setSelected(false);
+        bloodGroupANegative.setSelected(false);
+        bloodGroupBNegative.setSelected(false);
+        bloodGroupABNegative.setSelected(false);
+        sweButton.setSelected(false);
+        cseButton.setSelected(false);
+        eeeButton.setSelected(false);
+        bbaButton.setSelected(false);
+    }
+
+    private void showFormData() {
+        StringBuilder formData = new StringBuilder();
+        formData.append("Name: ").append(nameField.getText()).append("\n");
+        formData.append("Father's Name: ").append(fatherNameField.getText()).append("\n");
+        formData.append("Mother's Name: ").append(motherNameField.getText()).append("\n");
+        formData.append("Date of Birth: ")
+                .append(dayCombo.getSelectedItem()).append(" ")
+                .append(monthCombo.getSelectedItem()).append(" ")
+                .append(yearCombo.getSelectedItem()).append("\n");
+        formData.append("Gender: ");
+        if (maleButton.isSelected()) formData.append("Male");
+        else if (femaleButton.isSelected()) formData.append("Female");
+        else if (otherButton.isSelected()) formData.append("Other");
+        formData.append("\n");
+
+        formData.append("Address: ").append(addressField.getText()).append("\n");
+        formData.append("Blood Group: ");
+        if (bloodGroupAPositive.isSelected()) formData.append("A+");
+        else if (bloodGroupBPositive.isSelected()) formData.append("B+");
+        else if (bloodGroupABPositive.isSelected()) formData.append("AB+");
+        else if (bloodGroupOPositive.isSelected()) formData.append("O+");
+        else if (bloodGroupANegative.isSelected()) formData.append("A-");
+        else if (bloodGroupBNegative.isSelected()) formData.append("B-");
+        else if (bloodGroupABNegative.isSelected()) formData.append("AB-");
+        formData.append("\n");
+
+        formData.append("SSC GPA: ").append(sscGpaField.getText()).append("\n");
+        formData.append("HSC GPA: ").append(hscGpaField.getText()).append("\n");
+
+        formData.append("Department: ");
+        if (sweButton.isSelected()) formData.append("SWE");
+        else if (cseButton.isSelected()) formData.append("CSE");
+        else if (eeeButton.isSelected()) formData.append("EEE");
+        else if (bbaButton.isSelected()) formData.append("BBA");
+
+        JOptionPane.showMessageDialog(frame, formData.toString(), "Form Data", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    private String[] getDays() {
+        String[] days = new String[31];
+        for (int i = 1; i <= 31; i++) {
+            days[i - 1] = String.valueOf(i);
+        }
+        return days;
+    }
+
+    private String[] getMonths() {
+        return new String[]{"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+    }
+
+    private String[] getYears() {
+        String[] years = new String[30];
+        int currentYear = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR);
+        for (int i = 0; i < 30; i++) {
+            years[i] = String.valueOf(currentYear - i);
+        }
+        return years;
+    }
+
+    public static void main(String[] args) {
+        new StudentAdmissionForm();
+    }
+}
